@@ -13,8 +13,12 @@ PASS
 ok      github.com/karl-johan-grahn/microtest/handlers  0.525s
 ```
 
-## Run server locally
-`$ go run main.go`
+## Run service
+See the Makefile targets for how to run the service as a docker container,
+or run it via golang:
+```
+$ PORT=8090 go run main.go
+```
 
 ## Access server locally
 Try access server locally via localhost, for example:
