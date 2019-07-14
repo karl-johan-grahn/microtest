@@ -23,5 +23,7 @@ $ PORT=8090 go run main.go
 ```
 
 ## API documentation
-Access the API documentation via localhost, for example:2
-`$ curl -i localhost:8090/api/v1/openapi`
+Access the API documentation via localhost, for example:
+```
+$ curl -i localhost:8090/api/v1/openapi
+```
