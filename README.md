@@ -1,5 +1,7 @@
 # Micro service test
-This is a simple golang micro service test
+This is a simple golang micro service test.
+It has a few basic endpoints such as liveness, readiness, metrics, API documentation.
+It also has a basic endpoint to return any data for test purposes.
 
 ## Run tests locally
 ```
@@ -20,6 +22,6 @@ or run it via golang:
 $ PORT=8090 go run main.go
 ```
 
-## Access server locally
-Try access server locally via localhost, for example:
-`$ curl -i localhost:8090/hello`
+## API documentation
+Access the API documentation via localhost, for example:2
+`$ curl -i localhost:8090/api/v1/openapi`
