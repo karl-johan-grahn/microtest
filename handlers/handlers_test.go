@@ -11,7 +11,7 @@ func TestRouter(t *testing.T) {
   ts := httptest.NewServer(r)
   defer ts.Close()
 
-  res, err := http.Get(ts.URL + "/hello")
+  res, err := http.Get(ts.URL + "/api/v1/hello")
   if err != nil {
     t.Fatal(err)
   }
@@ -19,7 +19,7 @@ func TestRouter(t *testing.T) {
     t.Errorf("Status code for GET '/hello' is wrong. Have: %d, want: %d.", res.StatusCode, http.StatusOK)
   }
 
-  res, err = http.Post(ts.URL+"/hello", "text/plain", nil)
+  res, err = http.Post(ts.URL+"/api/v1/hello", "text/plain", nil)
   if err != nil {
     t.Fatal(err)
   }

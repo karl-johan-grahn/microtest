@@ -2,23 +2,23 @@ package main
 
 import (
   "context"
-  "log"
   "net/http"
   "os"
   "os/signal"
   "syscall"
+  "time"
+  "github.com/rs/zerolog"
+  "github.com/rs/zerolog/log"
   "github.com/karl-johan-grahn/microtest/handlers"
   "github.com/karl-johan-grahn/microtest/version"
 )
 
 func main() {
-  log.Printf(
-    "Starting the service...\ncommit: %s, build time: %s, release: %s",
-    version.Commit, version.BuildTime, version.Release,
-  )
+  zerolog.TimeFieldFormat = time.RFC3339
+  log.Info().Str("commit", version.Commit).Str("build time", version.BuildTime).Str("release", version.Release).Msg("Starting the service...")
   port := os.Getenv("PORT")
   if port == "" {
-    log.Fatal("PORT is not set via env variable, quitting.")
+    log.Fatal().Msg("PORT is not set via env variable, quitting.")
   }
   router := handlers.Router(version.BuildTime, version.Commit, version.Release)
   interrupt := make(chan os.Signal, 1)
@@ -36,24 +36,24 @@ func main() {
     err := srv.ListenAndServe()
     if err != nil {
       shutdown <- struct{}{}
-      log.Printf("%v", err)
+      log.Error().Msg(err.Error())
     }
   }()
 
-  log.Print("The service is getting ready to listen and serve on port " + port)
+  log.Info().Str("port", port).Msg("The service is getting ready to listen and serve")
   select {
   case killSignal := <-interrupt:
     switch killSignal {
     case os.Interrupt:
-      log.Print("Got SIGINT...")
+      log.Info().Msg("Got SIGINT...")
     case syscall.SIGTERM:
-      log.Print("Got SIGTERM...")
+      log.Info().Msg("Got SIGTERM...")
     }
   case <-shutdown:
-    log.Printf("Got an error...")
+    log.Error().Msg("Got an error...")
   }
 
-  log.Print("The service is shutting down...")
+  log.Info().Msg("The service is shutting down...")
   srv.Shutdown(context.Background())
-  log.Print("Done")
+  log.Info().Msg("Done")
 }

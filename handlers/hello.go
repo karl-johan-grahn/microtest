@@ -2,8 +2,8 @@ package handlers
 
 import (
   "encoding/json"
-  "log"
   "net/http"
+  "github.com/rs/zerolog/log"
 //  "math"
 //  "math/rand"
 //  "time"
@@ -22,7 +22,7 @@ func hello(buildTime, commit, release string) http.HandlerFunc {
 
     body, err := json.Marshal(info)
     if err != nil {
-      log.Printf("Could not encode info data: %v", err)
+      log.Error().Msg("Could not encode info data")
       http.Error(w, http.StatusText(http.StatusServiceUnavailable), http.StatusServiceUnavailable)
       return
     }

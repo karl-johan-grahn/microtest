@@ -1,0 +1,56 @@
+openapi: 3.0.0
+servers: []
+info:
+  description: Simple microservice test
+  version: 0.0.1
+  title: microtest
+  termsOfService: 'http://example.com/terms/'
+  contact:
+    email: kgr@qlik.com
+  license:
+    name: CC BY-SA 4.0
+    url: 'https://creativecommons.org/licenses/by/4.0/'
+tags: []
+paths:
+  /api/v1/hello:
+    get:
+      summary: ''
+      description: ''
+      parameters: []
+      operationId: hello
+      responses:
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+  /live:
+    get:
+      summary: Liveness
+      description: ''
+      parameters: []
+      operationId: live
+      responses:
+        '200':
+          description: Service has started
+  /ready:
+    get:
+      summary: Readiness
+      description: ''
+      parameters: []
+      operationId: ready
+      responses:
+        '200':
+          description: Ready to serve traffic
+        '503':
+          description: Not ready to serve traffic
+  /metrics:
+    get:
+      summary: ''
+      description: ''
+      parameters: []
+      operationId: metrics
+      responses:
+        default:
+          description: Default response
+security: []
