@@ -2,7 +2,7 @@ APP?=microtest
 PORT?=8090
 PROJECT?=github.com/karl-johan-grahn/microtest
 
-RELEASE?=0.0.1
+RELEASE?=0.0.2
 COMMIT?=$(shell git rev-parse --short HEAD)
 BUILD_TIME?=$(shell date -u '+%Y-%m-%d_%H:%M:%S')
 CONTAINER_IMAGE?=docker.io/karljohangrahn/${APP}
