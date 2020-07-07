@@ -24,17 +24,20 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: PORT
+              value: "{{ .Values.service.ports.port }}"
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.ports.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /live
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /ready
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

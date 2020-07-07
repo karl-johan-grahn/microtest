@@ -4,14 +4,15 @@ metadata:
   name: {{ include "microtest.fullname" . }}
   labels:
 {{ include "microtest.labels" . | indent 4 }}
+  annotations:
 {{- if .Values.metrics.prometheus.enabled }}
     prometheus.io/scrape: "true"
-    prometheus.io/port: {{ default .Values.service.port .Values.metrics.prometheus.port | quote }}
+    prometheus.io/port: {{ default .Values.service.ports.port .Values.metrics.prometheus.port | quote }}
 {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.ports.port }}
       targetPort: http
       protocol: TCP
       name: http

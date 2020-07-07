@@ -1,4 +1,4 @@
-FROM scratch
+FROM alpine:latest
 
 USER 65000:65000
 

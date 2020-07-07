@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: karljohangrahn/microtest
-  tag: 0.0.2
+  tag: 0.0.3
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -14,8 +14,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: NodePort
-  port: 8090
+  type: ClusterIP
+  ports:
+    port: 8090
 
 ingress:
   enabled: false
